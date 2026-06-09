@@ -13,6 +13,13 @@ export function Menu() {
     event.preventDefault(); // Não segue o link
 
     console.log('Clicado', Date.now());
+    setTheme(prevTheme => {
+      const nextTheme = prevTheme === 'dark' ? 'light' : 'dark';
+      //document.documentElement.setAttribute('data-theme', nextTheme);
+      return nextTheme;
+    });
+
+    document.documentElement.setAttribute('data-theme', theme);
   }
 
   return (

@@ -73,7 +73,6 @@ export function MainForm() {
   }
   return (
     <form onSubmit={handleCreateNewTask} className='form' action=''>
-
       <div className='formRow'>
         <DefaultInput
           labelText='task'

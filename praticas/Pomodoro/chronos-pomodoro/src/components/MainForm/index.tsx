@@ -62,6 +62,12 @@ export function MainForm() {
         activeTask: null,
         secondsRemaining: 0,
         formattedSecondsRemaining: '00:00',
+        tasks: prevState.tasks.map(task => {
+          if (prevState.activeTask && prevState.activeTask.id === task.id) {
+            return { ...task, interruptDate: Date.now() };
+          }
+          return task;
+        }),
       };
     });
   }
@@ -96,7 +102,6 @@ export function MainForm() {
             title='Iniciar nova tarefa'
             type='submit'
             icon={<PlayCircleIcon />}
-            key='botao_submit'
           />
         )}
 

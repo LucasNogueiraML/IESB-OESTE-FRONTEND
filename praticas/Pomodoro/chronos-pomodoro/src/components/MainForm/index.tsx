@@ -55,10 +55,20 @@ export function MainForm() {
     });
   }
 
+  function handleClick() {
+    setState(prevState => {
+      return {
+        ...prevState,
+        formattedSecondsRemaining: '21:00',
+      };
+    });
+  }
 
   return (
     <form onSubmit={handleCreateNewTask} className='form' action=''>
-
+      <button onClick={handleClick} type='button'>
+        Clicar
+      </button>
       <div className='formRow'>
         <DefaultInput
           labelText='task'
@@ -66,6 +76,7 @@ export function MainForm() {
           type='text'
           placeholder='Digite algo'
           ref={taskNameInput}
+          disabled={!!state.activeTask}
         />
       </div>
 

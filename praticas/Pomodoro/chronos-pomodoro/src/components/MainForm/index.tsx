@@ -55,6 +55,7 @@ export function MainForm() {
     });
   }
 
+
   function handleInterruptTask() {
     setState(prevState => {
       return {

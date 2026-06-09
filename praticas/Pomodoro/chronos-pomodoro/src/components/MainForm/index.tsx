@@ -4,11 +4,18 @@ import { DefaultButton } from '../DefaultButton';
 import { DefaultInput } from '../DefaultInput';
 import { useRef } from 'react';
 import type { TaskModel } from '../../models/TaskModel';
+
+import { getNextCycle } from '../../utils/getNextCycle';
 import { useTaskContext } from '../../contexts/TaskContext/useTaskContext';
 
-
 export function MainForm() {
+  const { state, setState } = useTaskContext();
+
   const taskNameInput = useRef<HTMLInputElement>(null);
+
+  // ciclos
+  const nextCycle = getNextCycle(state.currentCycle);
+
   function handleCreateNewTask(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
@@ -38,29 +45,16 @@ export function MainForm() {
         ...prevState,
         config: { ...prevState.config },
         activeTask: newTask,
-        currentCycle: 1, // Conferir
+        currentCycle: nextCycle,
         secondsRemaining, // Conferir
         formattedSecondsRemaining: '00:00', // Conferir
         tasks: [...prevState.tasks, newTask],
       };
     });
   }
-  const { setState } = useTaskContext();
-
-  function handleClick() {
-    setState(prevState => {
-      return {
-        ...prevState,
-        formattedSecondsRemaining: '21:00',
-      };
-    });
-  }
 
   return (
     <form onSubmit={handleCreateNewTask} className='form' action=''>
-      <button onClick={handleClick} type='button'>
-        Clicar
-      </button>
       <div className='formRow'>
         <DefaultInput
           labelText='task'
